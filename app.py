@@ -71,7 +71,7 @@ with st.form("weather_form"):
 
 if submitted:
     weather_data = pd.DataFrame([{
-        "day": str(int(day)),
+        "day": float(day),
         "pressure": pressure,
         "maxtemp": maxtemp,
         "temperature": temperature,
