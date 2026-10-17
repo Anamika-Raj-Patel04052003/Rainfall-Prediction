@@ -1,5 +1,8 @@
 
 import streamlit as st
+import pandas as pd
+import joblib
+from pathlib import Path
 
 st.set_page_config(
     page_title="Rainfall Prediction",
@@ -21,10 +24,12 @@ st.success("ML model loaded successfully!")
 st.subheader("Weather Details")
 
 with st.form("weather_form"):
-    day = st.selectbox(
-        "Day",
-        ["Monday", "Tuesday", "Wednesday", "Thursday",
-         "Friday", "Saturday", "Sunday"]
+    day = st.number_input(
+    "Day of Year",
+    min_value=1,
+    max_value=365,
+    value=180,
+    step=1
     )
 
     pressure = st.number_input(
@@ -66,7 +71,7 @@ with st.form("weather_form"):
 
 if submitted:
     weather_data = pd.DataFrame([{
-        "day": day,
+        "day": str(int(day)),
         "pressure": pressure,
         "maxtemp": maxtemp,
         "temperature": temperature,
